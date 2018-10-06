@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+		
+		<title>Login page</title>
+		
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    	
+    	<style>
+        	body        { padding-top:80px; }
+    	</style>
+    
+	</head>
+	<body>
+		<div class="container">
+
+			<div class="col-sm-6 col-sm-offset-3">
+		
+			    <h1><span class="fa fa-sign-in"></span> Sign in</h1>
+			
+			    <!-- 인증 처리 후 메시지가 있으면 메시지 표시 -->
+			    <% if (message.length > 0) { %>
+			        <div class="alert alert-danger"><%= message %></div>
+			    <% } %>
+			
+			    <form action="/login" method="post" >
+			        <div class="form-group">
+			            <label>Email</label>
+			            <input type="text" class="form-control" name="email">
+			        </div>
+			        <div class="form-group">
+			            <label>Password</label>
+			            <input type="password" class="form-control" name="password">
+			        </div>
+			
+			        <button type="submit" class="btn btn-warning btn-lg">Sign in</button>
+			    </form>
+			
+			    <hr>
+			
+			    <p>You don't have an account <a href="/signup">Join</a></p>
+			    <p><a href="/">Home</a>.</p>
+
+			</div>
+		
+		</div>
+
+	</body>
+</html>
