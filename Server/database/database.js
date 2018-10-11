@@ -60,46 +60,43 @@ function createSchema(app, config) {
 		// database 객체에 속성으로 추가
 		database[curItem.schemaName] = curSchema;
 		database[curItem.modelName] = curModel;
-		console.log("1");
 		if(curItem.modelName == 'CountryModel') {
-			console.log("2");
-			//make default data
-			fs.readFile('database/resources/'+curItem.defaultFile, 'utf-8', function(error, data) {
-				console.log("error :"+error);
-				console.log("data : "+data);
-				var line = data.split('\n');
-				for(var index=0;index<line.length;index++) {
-					var name = line[index].split(', ')[0];
-					var abbreviation = line[index].split(', ')[1];
+			//make default country data
+			fs.readFile('database/resources/' + curItem.defaultFile, 'utf-8', function(error, data) {
+				var lines = data.split('\n');
+				for(var ind = 0; ind < lines.length; ind++) {
+					var item = lines[ind].split(',');
+
+					var country = new database.CountryModel({
+						name: item[0],
+						abbreviation: item[1]
+					});
+
+					country.saveCountry(function(err, result) {
+						console.log("Added country => " + result);
+					});
 				}
-				var country = new database.CountryModel({
-					name: name,
-					abbreviation: abbreviation
-				});
-				country.saveCountry(function(err, result) {
-					console.log("Added a country");
-				});
 			});
 		} 
 		
 		if(curItem.modelName == 'CurrencyModel') {
-			//make default data
-			fs.readFile('database/resources/'+curItem.defaultFile, 'utf-8', function(error, data) {
-				var line = data.split('\n');
-				for(var index=0;index<line.length;index++) {
-					var name = line[index].split(', ')[0];
-					var abbreviation = line[index].split(', ')[1];
-					var symbol = line[index].split(', ')[2];
+			//make default currency data
+			fs.readFile('database/resources/' + curItem.defaultFile, 'utf-8', function(error, data) {
+				var lines = data.split('\n');
+
+				for(var ind = 0; ind < lines.length; ind++) {
+					var item = lines[ind].split(',');
+
+					var currency = new database.CurrencyModel({
+						name: item[0],
+						abbreviation: item[1],
+						symbol: item[2]
+					});
+
+					currency.saveCurrency(function(err, result) {
+						console.log("Added currency => " + result);
+					});
 				}
-				var currency = new database.CurrencyModel({
-					name: name,
-					abbreviation: abbreviation,
-					symbol: symbol
-				});
-				
-				currency.saveCurrency(function(err, result) {	
-					console.log("Added a currency.");
-				});
 			});
 		}
 		console.log('스키마 이름 [%s], 모델 이름 [%s] 이 database 객체의 속성으로 추가됨.', curItem.schemaName, curItem.modelName);

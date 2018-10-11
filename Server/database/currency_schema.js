@@ -14,12 +14,14 @@ SchemaObj.createSchema = function(mongoose) {
 	// definition of currency
 	var CurrencySchema = mongoose.Schema({
 	    name: {type: String, trim: false, 'default':''},		// name of the currency
-	    abbrviation: {type: String, trim:true, 'default':''},   // name of the abbrviation
+	    abbreviation: {type: String, trim:true, 'default':''},   // name of the abbreviation
+	    symbol: {type: String, trim:true, 'default':''},   // name of the abbreviation
 	});
 	
 	// 'required' validation
 	CurrencySchema.path('name').required(true, 'You need a name for a currency');
-	CurrencySchema.path('abbrviation').required(true, 'You need an abbreviation.');
+	CurrencySchema.path('abbreviation').required(true, 'You need an abbreviation.');
+	CurrencySchema.path('symbol').required(true, 'You need a symbol.');
 	
 	// Adding instance method in schema
 	CurrencySchema.methods = {
@@ -36,8 +38,8 @@ SchemaObj.createSchema = function(mongoose) {
 	
 	CurrencySchema.statics = {
 		// finding by abbreviation
-		load: function(abbrviation, callback) {
-			this.findOne({abbrviation: abbrviation})
+		load: function(abbreviation, callback) {
+			this.findOne({abbreviation: abbreviation})
 				.exec(callback);
 		},
 		list: function(options, callback) {

@@ -14,18 +14,17 @@ SchemaObj.createSchema = function(mongoose) {
 	// definition of country
 	var CountrySchema = mongoose.Schema({
 	    name: {type: String, trim: false, 'default':''},		// name of the country
-	    abbrviation: {type: String, trim:true, 'default':''},   // name of the abbrviation
+	    abbreviation: {type: String, trim:true, 'default':''},   // name of the abbreviation
 	});
 	
 	// 'required' validation
 	CountrySchema.path('name').required(true, 'You need a name for a country');
-	CountrySchema.path('abbrviation').required(true, 'You need an abbreviation.');
+	CountrySchema.path('abbreviation').required(true, 'You need an abbreviation.');
 	
 	// Adding instance method in schema
 	CountrySchema.methods = {
 		saveCountry: function(callback) {		// saving
 			var self = this;
-			console.log("logggggg");
 			this.validate(function(err) {
 				if (err) return callback(err);
 				
@@ -36,8 +35,8 @@ SchemaObj.createSchema = function(mongoose) {
 	
 	CountrySchema.statics = {
 		// finding by abbreviation
-		load: function(abbrviation, callback) {
-			this.findOne({abbrviation: abbrviation})
+		load: function(abbreviation, callback) {
+			this.findOne({abbreviation: abbreviation})
 				.exec(callback);
 		},
 		list: function(options, callback) {
