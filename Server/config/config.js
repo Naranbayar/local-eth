@@ -9,8 +9,8 @@ module.exports = {
 	db_schemas: [
         {file:'./user_schema', collection:'users6', schemaName:'UserSchema', modelName:'UserModel'}
 	,{file:'./post_schema', collection:'post', schemaName:'PostSchema', modelName:'PostModel'}
-	,{file:'./country_schema', collection:'country', schemaName:'CountrySchema', modelName:'CountryModel', file:'country.txt'}
-	,{file:'./currency_schema', collection:'currency', schemaName:'CurrencySchema', modelName:'CurrencyModel', file:'currency.txt'}
+	,{file:'./country_schema', collection:'country', schemaName:'CountrySchema', modelName:'CountryModel', defaultFile:'country.txt'}
+	,{file:'./currency_schema', collection:'currency', schemaName:'CurrencySchema', modelName:'CurrencyModel', defaultFile:'currency.txt'}
 	],
 	route_info: [
         {file:'./post', path:'/process/addpost', method:'addpost', type:'post'}

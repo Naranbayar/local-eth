@@ -1,0 +1,2 @@
+Won, KRW, ₩
+Dollars, USD, $

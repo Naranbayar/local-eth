@@ -25,7 +25,7 @@ SchemaObj.createSchema = function(mongoose) {
 	CountrySchema.methods = {
 		saveCountry: function(callback) {		// saving
 			var self = this;
-			
+			console.log("logggggg");
 			this.validate(function(err) {
 				if (err) return callback(err);
 				

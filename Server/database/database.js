@@ -60,9 +60,13 @@ function createSchema(app, config) {
 		// database 객체에 속성으로 추가
 		database[curItem.schemaName] = curSchema;
 		database[curItem.modelName] = curModel;
-		if(curModel == 'CountryModel') {
+		console.log("1");
+		if(curItem.modelName == 'CountryModel') {
+			console.log("2");
 			//make default data
-			fs.readFile('resources/'+database[curItem.file]+'.txt', 'utf-8', function(error, data) {
+			fs.readFile('database/resources/'+curItem.defaultFile, 'utf-8', function(error, data) {
+				console.log("error :"+error);
+				console.log("data : "+data);
 				var line = data.split('\n');
 				for(var index=0;index<line.length;index++) {
 					var name = line[index].split(', ')[0];
@@ -78,9 +82,9 @@ function createSchema(app, config) {
 			});
 		} 
 		
-		if(curModel == 'CurrencyModel') {
+		if(curItem.modelName == 'CurrencyModel') {
 			//make default data
-			fs.readFile('resources/'+database[curItem.file]+'.txt', 'utf-8', function(error, data) {
+			fs.readFile('database/resources/'+curItem.defaultFile, 'utf-8', function(error, data) {
 				var line = data.split('\n');
 				for(var index=0;index<line.length;index++) {
 					var name = line[index].split(', ')[0];
