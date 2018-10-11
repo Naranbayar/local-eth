@@ -8,6 +8,7 @@
  */
 
 var mongoose = require('mongoose');
+var fs = require('fs');
 
 // database 객체에 db, schema, model 모두 추가
 var database = {};
@@ -59,6 +60,44 @@ function createSchema(app, config) {
 		// database 객체에 속성으로 추가
 		database[curItem.schemaName] = curSchema;
 		database[curItem.modelName] = curModel;
+		if(curModel == 'CountryModel') {
+			//make default data
+			fs.readFile('resources/'+database[curItem.file]+'.txt', 'utf-8', function(error, data) {
+				var line = data.split('\n');
+				for(var index=0;index<line.length;index++) {
+					var name = line[index].split(', ')[0];
+					var abbreviation = line[index].split(', ')[1];
+				}
+				var country = new database.CountryModel({
+					name: name,
+					abbreviation: abbreviation
+				});
+				country.saveCountry(function(err, result) {
+					console.log("Added a country");
+				});
+			});
+		} 
+		
+		if(curModel == 'CurrencyModel') {
+			//make default data
+			fs.readFile('resources/'+database[curItem.file]+'.txt', 'utf-8', function(error, data) {
+				var line = data.split('\n');
+				for(var index=0;index<line.length;index++) {
+					var name = line[index].split(', ')[0];
+					var abbreviation = line[index].split(', ')[1];
+					var symbol = line[index].split(', ')[2];
+				}
+				var currency = new database.CurrencyModel({
+					name: name,
+					abbreviation: abbreviation,
+					symbol: symbol
+				});
+				
+				currency.saveCurrency(function(err, result) {	
+					console.log("Added a currency.");
+				});
+			});
+		}
 		console.log('스키마 이름 [%s], 모델 이름 [%s] 이 database 객체의 속성으로 추가됨.', curItem.schemaName, curItem.modelName);
 	}
 	
