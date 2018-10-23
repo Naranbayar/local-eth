@@ -18,10 +18,10 @@ module.exports = function(router, passport) {
         // 인증 안된 경우
         if (!req.user) {
             console.log('사용자 인증 안된 상태임.');
-            res.render('index.ejs', {login_success:false});
+            res.render('main_page.ejs', {login_success:false});
         } else {
             console.log('사용자 인증된 상태임.');
-            res.render('index.ejs', {login_success:true});
+            res.render('main_page.ejs', {login_success:true});
         }
     });
     
