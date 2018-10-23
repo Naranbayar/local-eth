@@ -13,8 +13,8 @@ SchemaObj.createSchema = function(mongoose) {
 	
 	// definition of country
 	var CountrySchema = mongoose.Schema({
-	    name: {type: String, trim: false, 'default':''},		// name of the country
-	    abbreviation: {type: String, trim:true, 'default':''},   // name of the abbreviation
+	    name:            { type: String, trim: false, 'default':''},  // name of the country
+	    abbreviation:    { type: String, trim: true, 'default':''},   // name of the abbreviation
 	});
 	
 	// 'required' validation

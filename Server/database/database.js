@@ -26,7 +26,15 @@ function connect(app, config) {
 	
 	// 데이터베이스 연결 : config의 설정 사용
     mongoose.Promise = global.Promise;  // mongoose의 Promise 객체는 global의 Promise 객체 사용하도록 함
-	mongoose.connect(config.db_url);
+
+    if(1) {
+		mongoose.connect(config.db_url);
+	} else {
+		mongoose.connect(config.db_url, function () { // in case of clear all database
+		    mongoose.connection.db.dropDatabase();
+		});
+	}
+
 	database.db = mongoose.connection;
 	
 	database.db.on('error', console.error.bind(console, 'mongoose connection error.'));	
@@ -68,8 +76,8 @@ function createSchema(app, config) {
 					var item = lines[ind].split(',');
 
 					var country = new database.CountryModel({
-						name: item[0],
-						abbreviation: item[1]
+						name: item[1],
+						abbreviation: item[0]
 					});
 
 					country.saveCountry(function(err, result) {

@@ -13,9 +13,9 @@ SchemaObj.createSchema = function(mongoose) {
 	
 	// definition of currency
 	var CurrencySchema = mongoose.Schema({
-	    name: {type: String, trim: false, 'default':''},		// name of the currency
-	    abbreviation: {type: String, trim:true, 'default':''},   // name of the abbreviation
-	    symbol: {type: String, trim:true, 'default':''},   // name of the abbreviation
+	    name:            { type: String, trim: false, 'default':''},  // name of the currency
+	    abbreviation:    { type: String, trim: true, 'default':''},   // name of the abbreviation
+	    symbol:          { type: String, trim: true, 'default':''},   // name of the abbreviation
 	});
 	
 	// 'required' validation

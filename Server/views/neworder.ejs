@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+		
+		<title>Board</title>
+		
+  		<link href="/public/semantic.min.css" rel="stylesheet" >				
+		
+		<script src="/public/jquery-2.1.4.min.js"></script>
+		<script src="/public/semantic.min.js"></script>
+		
+	</head>
+	<body>
+    	
+    	<div class="container">
+    		<br>
+    		
+			<div class="ui raised segment">
+				<a class="ui blue ribbon label">Board</a>
+      			<span id="board_title"><%=title %></span>
+			
+				
+				<div class="ui blue fluid card">
+					 <div class="content">       		
+				    	<form class="content ui form" method="post" action="/process/addorder">
+			    			<div class="field">
+					    		<label>Choose your order type</label>
+					    		<select name="orderType">
+						    		<option value="BUY">Buy</option>
+						    		<option value="SELL">Sell</option>
+								</select>	
+					  		</div>
+
+				    		<div class="two fields">
+					    		<div class="field">
+						    		<label>Your country</label>					    		
+						    		<select name="country">
+							    		<option value="NONE">Select country</option>
+							    		<% 
+										    for (var i = 0; i < countries.length; i++) {
+											   var curId = countries[i].id;
+											   var curName = countries[i].name;
+											   var curAbbreviation = countries[i].abbreviation;
+											   %>
+											<option value= <%=curAbbreviation %> ><%=curName %></option>
+										<% } %>
+									</select>	
+						  		</div>
+
+						    	<div class="field">
+					    			<label>Your currency</label>
+									<select name="currency">
+										<option value="NONE">Select currency</option>
+							    		<% 
+										    for (var i = 0; i < currencies.length; i++) {
+											   var curId = currencies[i].id;
+											   var curName = currencies[i].name;
+											   var curSymbol = currencies[i].symbol;
+											   var curAbbreviation = currencies[i].abbreviation;
+											   %>
+											<option value= <%=curAbbreviation %> ><%=curAbbreviation %></option>
+										<% } %>
+									</select>
+								</div>
+					 	    </div>
+						 	<div class="two fields">
+					    		<div class="field">
+					      			<label>Amount min</label>
+									<input type="text" name="amountMin" placeholder="Amount Min">
+								</div>
+								<div class="field">
+					      			<label>Amount max</label>
+									<input type="text" name="amountMax" placeholder="Amount Max">
+								</div>
+							</div>  
+							<div class="field">
+					    		<label>Price</label>
+					    		<input type="price" name="price" placeholder="Price">
+					  		</div>
+							<input class="ui submit button" type="submit" value="Add" name="" />
+							<input class="ui button" type="button" value="Cancel" name="" onclick="javascript:history.back()" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

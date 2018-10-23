@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+		
+		<title>Board</title>
+		
+  		<link href="/public/semantic.min.css" rel="stylesheet" >
+		
+		<script src="/public/jquery-2.1.4.min.js"></script>
+		<script src="/public/semantic.min.js"></script>
+		
+		<script>
+			function listOrder(page, perPage) {
+				document.location = '/process/listOrder?page=' + page + '&perPage=' + perPage;
+			}
+		</script>
+		
+	</head>
+	<body>
+    	
+    	<div class="container">
+    		<br>
+    		
+			<div class="ui raised segment">
+				<a class="ui blue ribbon label">Board</a>
+      			<span id="board_title"><%=title %></span>
+			
+				
+				<div class="ui blue fluid card">
+					 <div class="content">
+       		
+			      		
+						<div class="ui grid">
+			   				<div class="two wide column">Number</div>
+			   				<div class="eight wide column">Title</div>
+			   				<div class="two wide column">Author</div>
+			   				<div class="two wide column">Date</div>
+			   				<div class="two wide column">View</div>
+			   			</div>				    		
+						<div class="ui very relaxed selection celled list">
+							<%  var noStart = (pageCount - page) * perPage;
+							
+							    for (var i = 0; i < orders.length; i++) {
+								   var curId = orders[i]._doc._id;
+								   var curType = orders[i]._doc.type;
+								   var curStatus = orders[i]._doc.status;
+								   var curAmountMin = orders[i]._doc.amount_min;
+								   var curAmountMax = orders[i]._doc.amount_max;
+								   var curPaymentType = orders[i]._doc.payment_type;
+								   var curPrice = orders[i]._doc.price;
+								   var curCreatedDate = orders[i]._doc.created_date;
+								   var curUpdatedDate = orders[i]._doc.updated_date;
+								   var curCurrencyAbbr = orders[i]._doc._currency_id;
+								   var curCountryAbbr = orders[i]._doc._country_id;
+								   %>
+								    <%=curId %><br>
+								    <%=curType %><br>
+								    <%=curStatus %><br>
+								    <%=curAmountMin %><br>
+								    <%=curAmountMax %><br>
+								    <%=curPaymentType %><br>
+								    <%=curPrice %><br>
+								    <%=curCreatedDate %><br>
+								    <%=curUpdatedDate %><br>
+								    <%=curCurrencyAbbr %><br>
+								    <%=curCountryAbbr %><br>
+								    <br><br>
+							<% } %>	
+						 
+				    	</div>
+			    	 
+			       		<br>
+						<div class="tiny ui basic buttons">
+					 		<%
+					 			if (page > 0) {
+					 		%>
+					 				<div class="ui icon button" onclick="listOrder(0, <%=perPage %>)">
+										<i class="backward icon"></i>
+									</div>
+									<div class="ui icon button" onclick="listOrder(<%=(page-1) %>, <%=perPage %>)">
+										<i class="left chevron icon"></i>
+									</div>
+					 		<%
+					 			} else {
+					 		%>
+					 				<div class="ui disabled icon button">
+										<i class="backward icon"></i>
+									</div>
+									<div class="ui disabled icon button">
+										<i class="left chevron icon"></i>
+									</div>
+					 		<%
+					 			}
+					 		%>
+					 		<% 
+					 			var initial = Math.floor(page / 10) * 10;
+					 			console.log('initial : ' + initial);
+					 			
+					 			var max = pageCount - initial;
+					 			if (max > 10) {
+					 				max = initial + 10;
+					 			} else {
+					 				max = initial + max;
+					 			}
+					 			console.log('max : ' + max);
+					 			
+					 			for (var i = initial; i < max; i++) {
+					 				if (i != page) {
+					 		%>
+					 					<div class="ui button" onclick="listOrder(<%=i %>, <%=perPage %>)">
+					 						<%= i %>
+					 					</div>
+					 		<%
+					 				} else {
+					 		%>
+					 					<div class="ui active basic button">
+					 						<%= i %>
+					 					</div>
+					 		<% 
+					 				}
+					 			}
+					 		%>
+					 		<%
+					 			if ((page+1) < pageCount) {
+					 		%>
+					 				<div class="ui icon button" onclick="listOrder(<%=(page+1) %>, <%=perPage %>)">
+										<i class="right chevron icon"></i>
+									</div>
+									<div class="ui icon button" onclick="listOrder(<%=(pageCount-1) %>, <%=perPage %>)">
+										<i class="forward icon"></i>
+									</div>
+					 		<%
+					 			} else {
+					 		%>
+					 				<div class="ui disabled icon button">
+										<i class="right chevron icon"></i>
+									</div>
+									<div class="ui disabled icon button">
+										<i class="forward icon"></i>
+									</div>
+					 		<%
+					 			}
+					 		%>
+					 	</div>
+						 	  
+						<br><br>
+						<a class="ui button" href='/process/listOrder?page=0&perPage=2'>Re-request</a>
+						<a class="ui button" href='/process/newOrder'>Write</a>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+

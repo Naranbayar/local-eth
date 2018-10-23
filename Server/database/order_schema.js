@@ -19,21 +19,21 @@ SchemaOrder.createSchema = function(mongoose) {
 	    //_city_id:        { type: mongoose.Schema.ObjectId, ref: 'City'},
 	    _currency_id:    { type: mongoose.Schema.ObjectId, required: true, ref: 'Currency'},
 
-	    type:            {type: String, required: true, enum: ['BUY', 'SELL'], default: 'SELL'},
+	    type:            { type: String, required: true, enum: ['BUY', 'SELL'], default: 'SELL'},
 
-	    status:          {type: String, required: true, enum: ['ACTIVE', 'PAUSE', 'DONE'], default: 'ACTIVE'},
+	    status:          { type: String, required: true, enum: ['ACTIVE', 'PAUSE', 'DONE'], default: 'ACTIVE'},
 	    
-	    amount_min:      {type: Number, required: true, default:0.0},
-	    amount_max:      {type: Number, required: true, default:1.0},
+	    amount_min:      { type: Number, required: true, default:0.0},
+	    amount_max:      { type: Number, required: true, default:1.0},
 
-	    payment_type:    {type: String, required: true, enum: ['BANK', 'CASH'], default: 'BANK'},
+	    payment_type:    { type: String, required: true, enum: ['BANK', 'CASH'], default: 'BANK'},
 
-	    price_method:    {type: String, required: true, enum: ['CONSTANT', 'FLEXIBLE'], default: 'CONSTANT'},
-	    price_source:    {type: String, required: true, default:'NONE'},
-    	price:           {type: Number, required: true, default:1},
+	    price_method:    { type: String, required: true, enum: ['CONSTANT', 'FLEXIBLE'], default: 'CONSTANT'},
+	    price_source:    { type: String, required: true, default:'NONE'},
+		price:           { type: Number, required: true, default:1},
 
-	    created_date:    {type: Date, default: Date.now},
-	    updated_date:    {type: Date, default: Date.now}
+	    created_date:    { type: Date, default: Date.now},
+	    updated_date:    { type: Date, default: Date.now}
 	});
 	
 	//TODO : add all validations
