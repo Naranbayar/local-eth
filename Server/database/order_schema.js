@@ -56,8 +56,8 @@ SchemaOrder.createSchema = function(mongoose) {
 		load: function(id, callback) {
 			this.findOne({_id: id})
 				//.populate('_user_id', 'Created user')
-				.populate('_country_id', 'Country')
-				.populate('_currency_id', 'Currency')
+				.populate('_country_id')
+				.populate('_currency_id')
 				.exec(callback);
 		},
 		list: function(options, callback) {
@@ -65,8 +65,8 @@ SchemaOrder.createSchema = function(mongoose) {
 			
 			this.find(criteria)
 				//.populate('_user_id', 'Created user')
-				.populate('_country_id', 'Country')
-				.populate('_currency_id', 'Currency')
+				.populate('_country_id')
+				.populate('_currency_id')
 				.limit(Number(options.perPage))
 				.skip(options.perPage * options.page)
 				.exec(callback);
