@@ -6,7 +6,7 @@
  */
   
 module.exports = function(router, passport) {
-    console.log('user_passport 호출됨.');
+    console.log('user_passport is called.');
 
     // 홈 화면
     router.route('/').get(function(req, res) {

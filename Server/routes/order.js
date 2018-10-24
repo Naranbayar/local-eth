@@ -82,7 +82,7 @@ var addOrder = function(req, res) {
 };
 
 var listOrder = function(req, res) {
-	console.log('order module 안에 있는 listOrder 호출됨.');
+	console.log('order module 안에 있는 listOrder is called.');
   
     var paramPage = req.body.page || req.query.page;
     var paramPerPage = req.body.perPage || req.query.perPage;
@@ -216,7 +216,7 @@ var newOrder = function(req, res) {
 
 //NOT FINISHED !!!
 var showOrder = function(req, res) {
-	console.log('post 모듈 안에 있는 showpost 호출됨.');
+	console.log('post 모듈 안에 있는 showpost is called.');
   
     // URL 파라미터로 전달됨
     var paramId = req.body.id || req.query.id || req.params.id;

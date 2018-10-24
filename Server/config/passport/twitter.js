@@ -1,12 +1,12 @@
 /**
- * 패스포트 설정 파일
+ * config file of passport
  * 
- * 트위터 인증 방식에 사용되는 패스포트 설정
+ * Passport setting of authentication using twitter.
  *
  * @date 2016-11-10
  * @author Mike
  */
-
+//not implemented yet
 var TwitterStrategy = require('passport-twitter').Strategy;
 var config = require('../config');
 
@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 		consumerSecret: config.twitter.clientSecret,
 		callbackURL: config.twitter.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
-		console.log('passport의 facebook 호출됨.');
+		console.log('[twitter.js] twitter is called in passport.');
 		console.dir(profile);
 		
 		var options = {

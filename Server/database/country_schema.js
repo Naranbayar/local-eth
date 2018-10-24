@@ -49,7 +49,7 @@ SchemaObj.createSchema = function(mongoose) {
 		}
 	}
 	
-	console.log('Defined CountrySchema.');
+	console.log('[country_schema.js] Defined CountrySchema.');
 
 	return CountrySchema;
 };

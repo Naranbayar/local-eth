@@ -1,76 +1,76 @@
 /**
- * 게시판 만들기
+ * making bulletin board
  * 
- * 기본 게시판 기능 구현
+ * Basic implementation of basic bulletin board
  *
  * @date 2016-11-10
  * @author Mike
  */
  
 
-// Express 기본 모듈 불러오기
+// Express module imporing
 var express = require('express')
   , http = require('http')
   , path = require('path');
 
-// Express의 미들웨어 불러오기
+// Importing one of middleware in Express
 var bodyParser = require('body-parser')
   , cookieParser = require('cookie-parser')
   , static = require('serve-static')
   , errorHandler = require('errorhandler');
 
-// 에러 핸들러 모듈 사용
+// using error handler module 
 var expressErrorHandler = require('express-error-handler');
 
-// Session 미들웨어 불러오기
+// Importing Session middleware
 var expressSession = require('express-session');
   
 
-//===== Passport 사용 =====//
+//===== Using Passport =====//
 var passport = require('passport');
 var flash = require('connect-flash');
 
 
-// 모듈로 분리한 설정 파일 불러오기
+// calling configs which are separated by module.
 var config = require('./config/config');
 
-// 모듈로 분리한 데이터베이스 파일 불러오기
+// calling database which are separated by module.
 var database = require('./database/database');
 
-// 모듈로 분리한 라우팅 파일 불러오기
+// calling router which are separated by module.
 var route_loader = require('./routes/route_loader');
 
  
 
 
-// 익스프레스 객체 생성
+// making express object
 var app = express();
 
 
-//===== 뷰 엔진 설정 =====//
+//===== setting view engine =====//
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-console.log('뷰 엔진이 ejs로 설정되었습니다.');
+console.log('[app.js] view engine is ejs.');
 
 
-//===== 서버 변수 설정 및 static으로 public 폴더 설정  =====//
+//===== setting server variables and folder by static.  =====//
 console.log('config.server_port : %d', config.server_port);
 app.set('port', process.env.PORT || 3000);
  
 
-// body-parser를 이용해 application/x-www-form-urlencoded 파싱
+// Parse application/x-www-form-urlencoded by using body-parser
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// body-parser를 이용해 application/json 파싱
+// Parse application/json by using body-parser
 app.use(bodyParser.json())
 
-// public 폴더를 static으로 오픈
+// Opens public folder using static
 app.use('/public', static(path.join(__dirname, 'public')));
  
-// cookie-parser 설정
+// setting cookie-parser 
 app.use(cookieParser());
 
-// 세션 설정
+// setting session
 app.use(expressSession({
 	secret:'my key',
 	resave:true,
@@ -79,30 +79,30 @@ app.use(expressSession({
 
 
 
-//===== Passport 사용 설정 =====//
-// Passport의 세션을 사용할 때는 그 전에 Express의 세션을 사용하는 코드가 있어야 함
+//===== Setting Passport =====//
+// To use session in Passport, there must be code for using sessions in Express first
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
  
 
 
-//라우팅 정보를 읽어들여 라우팅 설정
+// Setting routing by reading route information
 var router = express.Router();
 route_loader.init(app, router);
 
 
-// 패스포트 설정
+// setting passport
 var configPassport = require('./config/passport');
 configPassport(app, passport);
 
-// 패스포트 라우팅 설정
+// setting routing of passport
 var userPassport = require('./routes/user_passport');
 userPassport(router, passport);
 
 
 
-//===== 404 에러 페이지 처리 =====//
+//===== 404 error page handling =====//
 var errorHandler = expressErrorHandler({
  static: {
    '404': './public/404.html'
@@ -113,34 +113,34 @@ app.use( expressErrorHandler.httpError(404) );
 app.use( errorHandler );
 
 
-//===== 서버 시작 =====//
+//===== Server start =====//
 
-//확인되지 않은 예외 처리 - 서버 프로세스 종료하지 않고 유지함
+// handling of uncaught exceptions. [leave server process unterminated.]
 process.on('uncaughtException', function (err) {
-	console.log('uncaughtException 발생함 : ' + err);
-	console.log('서버 프로세스 종료하지 않고 유지함.');
+	console.log('uncaughtException occured : ' + err);
+	console.log('[app.js] leave server process unterminated.');
 	
 	console.log(err.stack);
 });
 
-// 프로세스 종료 시에 데이터베이스 연결 해제
+// Terminating database connection when process ends
 process.on('SIGTERM', function () {
-    console.log("프로세스가 종료됩니다.");
+    console.log("[app.js] Process is terminated.");
     app.close();
 });
 
 app.on('close', function () {
-	console.log("Express 서버 객체가 종료됩니다.");
+	console.log("Express server object is terminated.");
 	if (database.db) {
 		database.db.close();
 	}
 });
 
-// 시작된 서버 객체를 리턴받도록 합니다. 
+// returns started server object 
 var server = http.createServer(app).listen(app.get('port'), function(){
-	console.log('서버가 시작되었습니다. 포트 : ' + app.get('port'));
+	console.log('[app.js] server is launched. port : ' + app.get('port'));
 
-	// 데이터베이스 초기화
+	// Initialization of database
 	database.init(app, config);
    
 });

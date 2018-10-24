@@ -10,7 +10,7 @@ var Entities = require('html-entities').AllHtmlEntities;
 
 
 var addpost = function(req, res) {
-	console.log('post 모듈 안에 있는 addpost 호출됨.');
+	console.log('post 모듈 안에 있는 addpost is called.');
  
     var paramTitle = req.body.title || req.query.title;
     var paramContents = req.body.contents || req.query.contents;
@@ -87,7 +87,7 @@ var addpost = function(req, res) {
 };
 
 var listpost = function(req, res) {
-	console.log('post 모듈 안에 있는 listpost 호출됨.');
+	console.log('post 모듈 안에 있는 listpost is called.');
   
     var paramPage = req.body.page || req.query.page;
     var paramPerPage = req.body.perPage || req.query.perPage;
@@ -168,7 +168,7 @@ var listpost = function(req, res) {
 
 
 var showpost = function(req, res) {
-	console.log('post 모듈 안에 있는 showpost 호출됨.');
+	console.log('post 모듈 안에 있는 showpost is called.');
   
     // URL 파라미터로 전달됨
     var paramId = req.body.id || req.query.id || req.params.id;

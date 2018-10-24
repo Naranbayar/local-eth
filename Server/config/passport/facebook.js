@@ -1,7 +1,7 @@
 /**
- * 패스포트 설정 파일
+ *  config file of passport
  * 
- * 페이스북 인증 방식에 사용되는 패스포트 설정
+ * Passport setting of authentication using facebook.
  *
  * @date 2016-11-10
  * @author Mike
@@ -16,7 +16,7 @@ module.exports = function(app, passport) {
 		clientSecret: config.facebook.clientSecret,
 		callbackURL: config.facebook.callbackURL
 	}, function(accessToken, refreshToken, profile, done) {
-		console.log('passport의 facebook 호출됨.');
+		console.log('[facebook.js] facebook is called in passport.');
 		console.dir(profile);
 		
 		var options = {

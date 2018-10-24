@@ -73,7 +73,7 @@ SchemaOrder.createSchema = function(mongoose) {
 		}
 	}
 	
-	console.log('OrderSchema success.');
+	console.log('[order_schema.js] OrderSchema success.');
 
 	return OrderSchema;
 };

@@ -1,6 +1,6 @@
 
 /*
- * 설정
+ * config file
  */
 
 module.exports = {

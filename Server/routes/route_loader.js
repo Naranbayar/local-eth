@@ -13,21 +13,21 @@ var config = require('../config/config');
 
 
 route_loader.init = function(app, router) {
-	console.log('route_loader.init 호출됨.');
+	console.log('route_loader.init is called.');
 	return initRoutes(app, router);
 };
 
 // route_info에 정의된 라우팅 정보 처리
 function initRoutes(app, router) {
 	var infoLen = config.route_info.length;
-	console.log('설정에 정의된 라우팅 모듈의 수 : %d', infoLen);
+	console.log('[route_loader.js] the number of routing module in config : %d', infoLen);
  
 	for (var i = 0; i < infoLen; i++) {
 		var curItem = config.route_info[i];
 			
 		// 모듈 파일에서 모듈 불러옴
 		var curModule = require(curItem.file);
-		console.log('%s 파일에서 모듈정보를 읽어옴.', curItem.file);
+		console.log('[route_loader.js] reading module informations in %s file.', curItem.file);
 		
 		//  라우팅 처리
 		if (curItem.type == 'get') {
@@ -39,7 +39,7 @@ function initRoutes(app, router) {
 		}
 		
 		
-		console.log('라우팅 모듈 [%s]이(가) 설정됨.', curItem.method);
+		console.log('[route_loader.js] setting [%s] routing module.', curItem.method);
 	}
 
     // 라우터 객체 등록

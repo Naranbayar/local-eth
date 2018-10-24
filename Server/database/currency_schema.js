@@ -52,7 +52,7 @@ SchemaObj.createSchema = function(mongoose) {
 		}
 	}
 	
-	console.log('Defined CurrencySchema.');
+	console.log('[currency_schema.js] Defined CurrencySchema.');
 
 	return CurrencySchema;
 };

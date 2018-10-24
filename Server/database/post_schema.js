@@ -81,7 +81,7 @@ SchemaObj.createSchema = function(mongoose) {
 		}
 	}
 	
-	console.log('PostSchema 정의함.');
+	console.log('[post_schema.js] PostSchema is defined.');
 
 	return PostSchema;
 };
