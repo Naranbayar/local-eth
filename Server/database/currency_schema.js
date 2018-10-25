@@ -57,6 +57,6 @@ SchemaObj.createSchema = function(mongoose) {
 	return CurrencySchema;
 };
 
-// module.exports에 CurrencySchema 객체 직접 할당
+// Direct assign of CurrencySchema object in module.exports
 module.exports = SchemaObj;
 

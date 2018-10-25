@@ -1,8 +1,7 @@
 /**
- * 패스포트 기본 설정 파일
- * 
- * 패스포트 설정을 위한 기본 파일로 passport 폴더에 있는 설정 파일들을 사용함
- * serializeUser, deserializeUser 메소드 설정
+ * Passport setting file
+ * This file is moduled for separate setting codes of passport from main code.
+ * Setting serializeUser, deserializeUser methods
  *
  * @date 2016-11-10
  * @author Mike
@@ -17,29 +16,28 @@ var google = require('./passport/google');
 module.exports = function (app, passport) {
 	console.log('[passport.js] config/passport called.');
 
-    // 사용자 인증 성공 시 호출
-    // 사용자 정보를 이용해 세션을 만듦
-    // Sign in 이후에 들어오는 요청은 deserializeUser 메소드 안에서 이 세션을 확인할 수 있음
+    // This will be called after success of user authentication
+    // making session of user information.
+    // Requests commig after 'Sign in' can be checked in 'deserializeUser' method by the session
     passport.serializeUser(function(user, done) {
         console.log('[passport.js] serializeUser() is called.');
         console.dir(user);
 
-        done(null, user);  // 이 인증 콜백에서 넘겨주는 user 객체의 정보를 이용해 세션 생성
+        done(null, user);  // This user object is used for making session.
     });
 
-    // 사용자 인증 이후 사용자 요청 시마다 호출
-    // user -> 사용자 인증 성공 시 serializeUser 메소드를 이용해 만들었던 세션 정보가 파라미터로 넘어온 것임
+    // This method is called every requests after user authentication.
+    // After user auth, the session made by 'serializeUser' method is given by input parameter.
     passport.deserializeUser(function(user, done) {
         console.log('[passport.js] deserializeUser() is called.');
         console.dir(user);
-
-        // 사용자 정보 중 id나 email만 있는 경우 사용자 정보 List 필요 - 여기에서는 user 객체 전체를 패스포트에서 관리
-        // 두 번째 파라미터로 지정한 사용자 정보는 req.user 객체로 복원됨
-        // 여기에서는 파라미터로 받은 user를 별도로 처리하지 않고 그대로 넘겨줌
-        done(null, user);  
+        // If there's only id and email information in user information, We need user information List. Currently passport manages whole user object.
+        // user information given by the second parameter is recovered as req.user object.
+        // We are passing user as it is.
+         done(null, user);  
     });
 
-	// 인증방식 설정
+	// Setting the way of authentication
 	passport.use('local-login', local_login);
 	passport.use('local-signup', local_signup);
 	passport.use('facebook', facebook(app, passport));

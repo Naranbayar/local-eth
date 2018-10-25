@@ -54,6 +54,6 @@ SchemaObj.createSchema = function(mongoose) {
 	return CountrySchema;
 };
 
-// module.exports에 CountrySchema 객체 직접 할당
+// Direct assign of CountrySchema object in module.exports
 module.exports = SchemaObj;
 

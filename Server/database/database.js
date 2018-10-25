@@ -1,7 +1,7 @@
 
 /*
- * 데이터베이스 스키마 로딩
- * 기본 파일이며 개발자 수정 필요없음
+ * Loading Database schema
+ * This is basic code and developer don't have to change this codes
  *
  * @date 2016-11-10
  * @author Mike
@@ -10,22 +10,22 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
 
-// database 객체에 db, schema, model 모두 추가
+// Adding all of db, schema, model to database object
 var database = {};
 
-// 초기화를 위해 호출하는 함수
+// This method is called for initialization.
 database.init = function(app, config) {
 	console.log('init() is called.');
 	
 	connect(app, config);
 }
 
-//데이터베이스에 연결하고 응답 객체의 속성으로 db 객체 추가
+// Making connection with database and adding db object for attribute of request object
 function connect(app, config) {
 	console.log('connect() is called.');
 	
-	// 데이터베이스 연결 : config의 설정 사용
-    mongoose.Promise = global.Promise;  // mongoose의 Promise 객체는 global의 Promise 객체 사용하도록 함
+	// connection with database object : using settings of config
+    mongoose.Promise = global.Promise;  // Promise object of mongoose will use Promise object of global.
 
     if(1) {
 		mongoose.connect(config.db_url);
@@ -39,9 +39,9 @@ function connect(app, config) {
 	
 	database.db.on('error', console.error.bind(console, 'mongoose connection error.'));	
 	database.db.on('open', function () {
-		console.log('데이터베이스에 연결되었습니다. : ' + config.db_url);
+		console.log('[database.js] connection with database success. : ' + config.db_url);
 		
-		// config에 등록된 스키마 및 모델 객체 생성
+		//making model object and schema object registered in config
 		createSchema(app, config);
 		
 	});
@@ -49,23 +49,23 @@ function connect(app, config) {
 
 }
 
-// config에 정의된 스키마 및 모델 객체 생성
+// Making schema and model object defined in config file
 function createSchema(app, config) {
 	var schemaLen = config.db_schemas.length;
-	console.log('설정에 정의된 스키마의 수 : %d', schemaLen);
+	console.log('the number of schemas in settings : %d', schemaLen);
 	
 	for (var i = 0; i < schemaLen; i++) {
 		var curItem = config.db_schemas[i];
 		
-		// 모듈 파일에서 모듈 불러온 후 createSchema() 함수 호출하기
+		// after importing module from module file, calling createSchema().
 		var curSchema = require(curItem.file).createSchema(mongoose);
-		console.log('%s 모듈을 불러들인 후 스키마 정의함.', curItem.file);
+		console.log('schema is defined after importing %s module.', curItem.file);
 		
-		// User 모델 정의
+		// User model definition.
 		var curModel = mongoose.model(curItem.collection, curSchema);
-		console.log('%s 컬렉션을 위해 모델 정의함.', curItem.collection);
+		console.log('model is defined for %s collection.', curItem.collection);
 		
-		// database 객체에 속성으로 추가
+		// Adding to attributes of the database object.
 		database[curItem.schemaName] = curSchema;
 		database[curItem.modelName] = curModel;
 		if(curItem.modelName == 'CountryModel') {
@@ -107,13 +107,13 @@ function createSchema(app, config) {
 				}
 			});
 		}
-		console.log('스키마 이름 [%s], 모델 이름 [%s] 이 database 객체의 속성으로 추가됨.', curItem.schemaName, curItem.modelName);
+		console.log('schema name [%s], model name [%s] is added as attributes of database object.', curItem.schemaName, curItem.modelName);
 	}
 	
 	app.set('database', database);
-	console.log('database 객체가 app 객체의 속성으로 추가됨.');
+	console.log('database object is added as attributes of the app object.');
 }
  
 
-// database 객체를 module.exports에 할당
+// database object projection to module.exports
 module.exports = database;

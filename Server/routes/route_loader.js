@@ -1,7 +1,7 @@
 /**
- * 라우팅 모듈을 로딩하여 설정
+ * Setting informations  from routing module
  * 
- * 라우팅 모듈 파일에 대한 정보는 config.js의 route_info 배열에 등록함
+ * Informations in routing module is registered in route_info Arrays in config.js
  *
  * @date 2016-11-10
  * @author Mike
@@ -17,7 +17,7 @@ route_loader.init = function(app, router) {
 	return initRoutes(app, router);
 };
 
-// route_info에 정의된 라우팅 정보 처리
+// Handling routing informations defined in route_info
 function initRoutes(app, router) {
 	var infoLen = config.route_info.length;
 	console.log('[route_loader.js] the number of routing module in config : %d', infoLen);
@@ -25,11 +25,11 @@ function initRoutes(app, router) {
 	for (var i = 0; i < infoLen; i++) {
 		var curItem = config.route_info[i];
 			
-		// 모듈 파일에서 모듈 불러옴
+		// calling module from module file
 		var curModule = require(curItem.file);
 		console.log('[route_loader.js] reading module informations in %s file.', curItem.file);
 		
-		//  라우팅 처리
+		//  Handling routing
 		if (curItem.type == 'get') {
             router.route(curItem.path).get(curModule[curItem.method]);
 		} else if (curItem.type == 'post') {
@@ -42,7 +42,7 @@ function initRoutes(app, router) {
 		console.log('[route_loader.js] setting [%s] routing module.', curItem.method);
 	}
 
-    // 라우터 객체 등록
+    // Registration of Route object
     app.use('/', router);
 }
 

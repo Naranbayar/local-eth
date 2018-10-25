@@ -1,5 +1,5 @@
 /**
- * 배열 객체 안의 배열 요소가 가지는 인덱스 값 리턴
+ *  Returns index value of each element of Array object
  */
 
 exports.indexOf = function (arr, obj) {
@@ -25,7 +25,7 @@ exports.indexOf = function (arr, obj) {
 }
 
 /**
- * 배열 안의 요소 중에서 파라미터와 같은 객체를 리턴
+ * Returns the object which has same value of parameter in the Array
  */
 
 exports.findByParam = function (arr, obj, callback) {

@@ -59,10 +59,10 @@ var addOrder = function(req, res) {
 	        orderObj.saveOrder(function(err, result) {
 				if (err) {
                     if (err) {
-                        console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                        console.error('[order.js] An error occured making response web document. : ' + err.stack);
 
                         res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                        res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                        res.write('<h2>An error occured making response web document.</h2>');
                         res.write('<p>' + err.stack + '</p>');
                         res.end();
 
@@ -76,13 +76,13 @@ var addOrder = function(req, res) {
 		
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}	
 };
 
 var listOrder = function(req, res) {
-	console.log('order module 안에 있는 listOrder is called.');
+	console.log('[order.js] listOrder is called in order module .');
   
     var paramPage = req.body.page || req.query.page;
     var paramPerPage = req.body.perPage || req.query.perPage;
@@ -91,9 +91,9 @@ var listOrder = function(req, res) {
     
 	var database = req.app.get('database');
 	
-    // 데이터베이스 객체가 초기화된 경우
+    // The case when database object is initialized
 	if (database.db) {
-		// 1. 글 리스트
+		// 1. List of objects
 		var options = {
 			page: paramPage,
 			perPage: paramPerPage
@@ -104,7 +104,7 @@ var listOrder = function(req, res) {
                 console.error('something wrong on OrderModel.list : ' + err.stack);
                 
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>게시판 글 목록 List 중 에러 발생</h2>');
+				res.write('<h2>An error occured in the list of board.</h2>');
                 res.write('<p>' + err.stack + '</p>');
 				res.end();
                 
@@ -114,7 +114,7 @@ var listOrder = function(req, res) {
 			if (results) {
 				console.dir(results);
  
-				// 전체 문서 객체 수 확인
+				// Checking the number of objects in whole document
 				database.OrderModel.count().exec(function(err, count) {
 
 					res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
@@ -131,10 +131,10 @@ var listOrder = function(req, res) {
 					console.log(context);
 					req.app.render('listOrder', context, function(err, html) {
                         if (err) {
-                            console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                            console.error('An error occured making response web document. : ' + err.stack);
 
                             res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                            res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                            res.write('<h2>An error occured making response web document.</h2>');
                             res.write('<p>' + err.stack + '</p>');
                             res.end();
 
@@ -148,13 +148,13 @@ var listOrder = function(req, res) {
 				
 			} else {
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>글 목록 List  실패</h2>');
+				res.write('<h2>Making List of objects failed</h2>');
 				res.end();
 			}
 		});
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}
 	
@@ -193,10 +193,10 @@ var newOrder = function(req, res) {
 	        /*req.app.render('newOrder', results, function(err, html) {
 	        	console.log('Here : ' + results);
                 if (err) {
-                    console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                    console.error('An error occured making response web document. : ' + err.stack);
 
                     res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                    res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                    res.write('<h2>An error occured making response web document.</h2>');
                     res.write('<p>' + err.stack + '</p>');
                     res.end();
 
@@ -216,25 +216,25 @@ var newOrder = function(req, res) {
 
 //NOT FINISHED !!!
 var showOrder = function(req, res) {
-	console.log('post 모듈 안에 있는 showpost is called.');
+	console.log('showpost is called in post module.');
   
-    // URL 파라미터로 전달됨
+    // It's passed to URL parameter
     var paramId = req.body.id || req.query.id || req.params.id;
 	
-    console.log('요청 파라미터 : ' + paramId);
+    console.log('Requested parameter : ' + paramId);
     
     
 	var database = req.app.get('database');
 	
-    // 데이터베이스 객체가 초기화된 경우
+    // The case when database object is initialized
 	if (database.db) {
-		// 1. 글 리스트
+		// 1. List of objects
 		database.OrderModel.load(paramId, function(err, results) {
 			if (err) {
-                console.error('게시판 글 List 중 에러 발생 : ' + err.stack);
+                console.error('There\'s an error in course of making list of object : ' + err.stack);
                 
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>게시판 글 List 중 에러 발생</h2>');
+				res.write('<h2>There\'s an error in course of making list of object</h2>');
                 res.write('<p>' + err.stack + '</p>');
 				res.end();
                 
@@ -246,38 +246,38 @@ var showOrder = function(req, res) {
   
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
 				
-				// 뷰 템플레이트를 이용하여 렌더링한 후 전송
+				// Send after rendering using view template
 				/*var context = {
-					title: '글 List ',
+					title: 'List of writings ',
 					posts: results,
 					Entities: Entities
 				};
 				
 				req.app.render('showOrder', context, function(err, html) {
 					if (err) {
-                        console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                        console.error('An error occured making response web document. : ' + err.stack);
                 
                         res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                        res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                        res.write('<h2>An error occured making response web document.</h2>');
                         res.write('<p>' + err.stack + '</p>');
                         res.end();
 
                         return;
                     }
 					
-					console.log('응답 웹문서 : ' + html);
+					console.log('Response document : ' + html);
 					res.end(html);
 				});*/
 			 
 			} else {
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>글 List  실패</h2>');
+				res.write('<h2>List up of objects failed</h2>');
 				res.end();
 			}
 		});
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}
 	

@@ -1,6 +1,6 @@
 /*
- * 게시판을 위한 라우팅 함수 정의
- *
+ * Routing Definition for Board 
+ * 
  * @date 2016-11-10
  * @author Mike
  */
@@ -10,27 +10,27 @@ var Entities = require('html-entities').AllHtmlEntities;
 
 
 var addpost = function(req, res) {
-	console.log('post 모듈 안에 있는 addpost is called.');
+	console.log('addpost is called in post module.');
  
     var paramTitle = req.body.title || req.query.title;
     var paramContents = req.body.contents || req.query.contents;
     var paramWriter = req.body.writer || req.query.writer;
 	
-    console.log('요청 파라미터 : ' + paramTitle + ', ' + paramContents + ', ' + 
+    console.log('Requested parameter : ' + paramTitle + ', ' + paramContents + ', ' + 
                paramWriter);
     
 	var database = req.app.get('database');
 	
-	// 데이터베이스 객체가 초기화된 경우
+	// The case when database object is initialized
 	if (database.db) {
 		
-		// 1. ID를 이용해 사용자 검색
+		// 1. Searching User by Id
 		database.UserModel.findByEmail(paramWriter, function(err, results) {
 			if (err) {
-                console.error('게시판 글 추가 중 에러 발생 : ' + err.stack);
+                console.error('An error occured in course of making writing of the board : ' + err.stack);
                 
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>게시판 글 추가 중 에러 발생</h2>');
+				res.write('<h2>An error occured in course of making writing of the board</h2>');
                 res.write('<p>' + err.stack + '</p>');
 				res.end();
                 
@@ -39,17 +39,17 @@ var addpost = function(req, res) {
 
 			if (results == undefined || results.length < 1) {
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>사용자 [' + paramWriter + ']를 찾을 수 없습니다.</h2>');
+				res.write('<h2> Cannot find User [' + paramWriter + '].</h2>');
 				res.end();
 				
 				return;
 			}
 			
 			var userObjectId = results[0]._doc._id;
-			console.log('사용자 ObjectId : ' + paramWriter +' -> ' + userObjectId);
+			console.log('User ObjectId : ' + paramWriter +' -> ' + userObjectId);
 			
-			// save()로 저장
-			// PostModel 인스턴스 생성
+			// save using save()
+			// Generating PostModel instance
 			var post = new database.PostModel({
 				title: paramTitle,
 				contents: paramContents,
@@ -59,10 +59,10 @@ var addpost = function(req, res) {
 			post.savePost(function(err, result) {
 				if (err) {
                     if (err) {
-                        console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                        console.error('An error occured making response web document. : ' + err.stack);
 
                         res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                        res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                        res.write('<h2>An error occured making response web document.</h2>');
                         res.write('<p>' + err.stack + '</p>');
                         res.end();
 
@@ -70,8 +70,8 @@ var addpost = function(req, res) {
                     }
                 }
 				
-			    console.log("글 데이터 추가함.");
-			    console.log('글 작성', '포스팅 글을 생성했습니다. : ' + post._id);
+			    console.log("Added writing data.");
+			    console.log('writing', 'Generated Post writing. : ' + post._id);
 			    
 			    return res.redirect('/process/showpost/' + post._id); 
 			});
@@ -80,25 +80,25 @@ var addpost = function(req, res) {
 		
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}
 	
 };
 
 var listpost = function(req, res) {
-	console.log('post 모듈 안에 있는 listpost is called.');
+	console.log('listpost is called in post module.');
   
     var paramPage = req.body.page || req.query.page;
     var paramPerPage = req.body.perPage || req.query.perPage;
 	
-    console.log('요청 파라미터 : ' + paramPage + ', ' + paramPerPage);
+    console.log('Requested parameter : ' + paramPage + ', ' + paramPerPage);
     
 	var database = req.app.get('database');
 	
-    // 데이터베이스 객체가 초기화된 경우
+    // The case when database object is initialized
 	if (database.db) {
-		// 1. 글 리스트
+		// 1. List of objects
 		var options = {
 			page: paramPage,
 			perPage: paramPerPage
@@ -106,10 +106,10 @@ var listpost = function(req, res) {
 		
 		database.PostModel.list(options, function(err, results) {
 			if (err) {
-                console.error('게시판 글 목록 List 중 에러 발생 : ' + err.stack);
+                console.error('An error occured in the list of board. : ' + err.stack);
                 
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>게시판 글 목록 List 중 에러 발생</h2>');
+				res.write('<h2>An error occured in the list of board.</h2>');
                 res.write('<p>' + err.stack + '</p>');
 				res.end();
                 
@@ -119,14 +119,14 @@ var listpost = function(req, res) {
 			if (results) {
 				console.dir(results);
  
-				// 전체 문서 객체 수 확인
+				// Checking the number of objects in whole document
 				database.PostModel.count().exec(function(err, count) {
 
 					res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
 					
-					// 뷰 템플레이트를 이용하여 렌더링한 후 전송
+					// Send after rendering using view template
 					var context = {
-						title: '글 목록',
+						title: 'List of writing',
 						posts: results,
 						page: parseInt(paramPage),
 						pageCount: Math.ceil(count / paramPerPage),
@@ -137,10 +137,10 @@ var listpost = function(req, res) {
 					
 					req.app.render('listpost', context, function(err, html) {
                         if (err) {
-                            console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                            console.error('An error occured making response web document. : ' + err.stack);
 
                             res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                            res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                            res.write('<h2>An error occured making response web document.</h2>');
                             res.write('<p>' + err.stack + '</p>');
                             res.end();
 
@@ -154,13 +154,13 @@ var listpost = function(req, res) {
 				
 			} else {
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>글 목록 List  실패</h2>');
+				res.write('<h2>Making List of objects failed</h2>');
 				res.end();
 			}
 		});
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}
 	
@@ -168,25 +168,25 @@ var listpost = function(req, res) {
 
 
 var showpost = function(req, res) {
-	console.log('post 모듈 안에 있는 showpost is called.');
+	console.log('showpost is called in post module.');
   
-    // URL 파라미터로 전달됨
+    // It's passed to URL parameter
     var paramId = req.body.id || req.query.id || req.params.id;
 	
-    console.log('요청 파라미터 : ' + paramId);
+    console.log('Requested parameter : ' + paramId);
     
     
 	var database = req.app.get('database');
 	
-    // 데이터베이스 객체가 초기화된 경우
+    // The case when database object is initialized
 	if (database.db) {
-		// 1. 글 리스트
+		// 1. List of objects
 		database.PostModel.load(paramId, function(err, results) {
 			if (err) {
-                console.error('게시판 글 List 중 에러 발생 : ' + err.stack);
+                console.error('There\'s an error in course of making list of objects: ' + err.stack);
                 
                 res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>게시판 글 List 중 에러 발생</h2>');
+				res.write('<h2>There\'s an error in course of making list of object</h2>');
                 res.write('<p>' + err.stack + '</p>');
 				res.end();
                 
@@ -198,38 +198,38 @@ var showpost = function(req, res) {
   
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
 				
-				// 뷰 템플레이트를 이용하여 렌더링한 후 전송
+				// Send after rendering using view template
 				var context = {
-					title: '글 List ',
+					title: 'List of writings',
 					posts: results,
 					Entities: Entities
 				};
 				
 				req.app.render('showpost', context, function(err, html) {
 					if (err) {
-                        console.error('응답 웹문서 생성 중 에러 발생 : ' + err.stack);
+                        console.error('An error occured making response web document. : ' + err.stack);
                 
                         res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-                        res.write('<h2>응답 웹문서 생성 중 에러 발생</h2>');
+                        res.write('<h2>An error occured making response web document.</h2>');
                         res.write('<p>' + err.stack + '</p>');
                         res.end();
 
                         return;
                     }
 					
-					console.log('응답 웹문서 : ' + html);
+					console.log('Response web document : ' + html);
 					res.end(html);
 				});
 			 
 			} else {
 				res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-				res.write('<h2>글 List  실패</h2>');
+				res.write('<h2>List up of objects failed</h2>');
 				res.end();
 			}
 		});
 	} else {
 		res.writeHead('200', {'Content-Type':'text/html;charset=utf8'});
-		res.write('<h2>데이터베이스 연결 실패</h2>');
+		res.write('<h2>Database connection failed</h2>');
 		res.end();
 	}
 	

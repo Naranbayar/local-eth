@@ -1,6 +1,5 @@
 /**
- * 게시판을 위한 데이터베이스 스키마를 정의하는 모듈
- *
+ * module for database schema for board page
  * @date 2016-11-10
  * @author Mike
  */
@@ -11,12 +10,12 @@ var SchemaObj = {};
 
 SchemaObj.createSchema = function(mongoose) {
 	
-	// 글 스키마 정의
+	// definition of single wtiring
 	var PostSchema = mongoose.Schema({
 	    title: {type: String, trim: true, 'default':''},
 	    contents: {type: String, trim:true, 'default':''},
 		writer: {type: mongoose.Schema.ObjectId, ref: 'User'},
-	    comments: [{		// 댓글
+	    comments: [{		// comments
 			contents: {type: String, trim:true, 'default': ''},
 			writer: {type: mongoose.Schema.ObjectId, ref: 'User'},
 			created_at: {type: Date, 'default': Date.now}
@@ -26,13 +25,13 @@ SchemaObj.createSchema = function(mongoose) {
 	    updated_at: {type: Date, index: {unique: false}, 'default': Date.now}
 	});
 	
-	// 필수 속성에 대한 'required' validation
-	PostSchema.path('title').required(true, '글 제목을 입력하셔야 합니다.');
-	PostSchema.path('contents').required(true, '글 내용을 입력하셔야 합니다.');
+	//  'required' validation
+	PostSchema.path('title').required(true, 'Title is needed.');
+	PostSchema.path('contents').required(true, 'Content is needed.');
 	
-	// 스키마에 인스턴스 메소드 추가
+	// adding instance method in schema
 	PostSchema.methods = {
-		savePost: function(callback) {		// 글 저장
+		savePost: function(callback) {		// saving the writing
 			var self = this;
 			
 			this.validate(function(err) {
@@ -41,7 +40,7 @@ SchemaObj.createSchema = function(mongoose) {
 				self.save(callback);
 			});
 		},
-		addComment: function(user, comment, callback) {		// 댓글 추가
+		addComment: function(user, comment, callback) {		// adding comment
 			this.comment.push({
 				contents: comment.contents,
 				writer: user._id
@@ -49,12 +48,12 @@ SchemaObj.createSchema = function(mongoose) {
 			
 			this.save(callback);
 		},
-		removeComment: function(id, callback) {		// 댓글 삭제
+		removeComment: function(id, callback) {		//  deleting comment
 			var index = utils.indexOf(this.comments, {id: id});
 			if (~index) {
 				this.comments.splice(index, 1);
 			} else {
-				return callback('ID [' + id + '] 를 가진 댓글 객체를 찾을 수 없습니다.');
+				return callback('Cannot find comment of ID [' + id + '].');
 			}
 			
 			this.save(callback);
@@ -62,7 +61,7 @@ SchemaObj.createSchema = function(mongoose) {
 	}
 	
 	PostSchema.statics = {
-		// ID로 글 찾기
+		// finding writes by ID
 		load: function(id, callback) {
 			this.findOne({_id: id})
 				.populate('writer', 'name provider email')
@@ -86,6 +85,6 @@ SchemaObj.createSchema = function(mongoose) {
 	return PostSchema;
 };
 
-// module.exports에 PostSchema 객체 직접 할당
+// PostSchema object projection to module.exports
 module.exports = SchemaObj;
 

@@ -1,8 +1,8 @@
 /**
  * config file of passport
  * 
- * 로컬 인증방식에서 회원가입에 사용되는 패스포트 설정
- *
+ * Passport setting for sign up using 'Local' authentication.
+ * 
  * @date 2016-11-10
  * @author Mike
  */
@@ -12,28 +12,28 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports = new LocalStrategy({
 		usernameField : 'email',
 		passwordField : 'password',
-		passReqToCallback : true    // 이 옵션을 설정하면 아래 콜백 함수의 첫번째 파라미터로 req 객체 전달됨
+		passReqToCallback : true    //Using this option means first parameter of below callback function is req object.
 	}, function(req, email, password, done) {
-        // 요청 파라미터 중 name 파라미터 확인
+        // checking name parameter
         var paramName = req.body.name || req.query.name;
 	 
 		console.log('[local_signup.js] local-signup is called in passport : ' + email + ', ' + password + ', ' + paramName);
 		
-	    // findOne 메소드가 blocking되지 않도록 하고 싶은 경우, async 방식으로 변경
+	    // If we want findOne method isn't blocked, change the way as asyncronous 
 	    process.nextTick(function() {
 	    	var database = req.app.get('database');
 		    database.UserModel.findOne({ 'email' :  email }, function(err, user) {
-		        // 에러 발생 시
+		        // if error occurs
 		        if (err) {
 		            return done(err);
 		        }
 		        
-		        // 기존에 사용자 정보가 있는 경우
+		        // if there's already duplicated user information
 		        if (user) {
 		        	console.log('[local_signup.js] there is already same id in database.');
-		            return done(null, false, req.flash('signupMessage', 'This ID is already taken by someone.'));  // 검증 콜백에서 두 번째 파라미터의 값을 false로 하여 인증 실패한 것으로 처리
+		            return done(null, false, req.flash('signupMessage', 'This ID is already taken by someone.'));  // false in second parameter means authentication failed
 		        } else {
-		        	// 모델 인스턴스 객체 만들어 저장
+		        	//  make model instance object and save it.
 		        	var user = new database.UserModel({'email':email, 'password':password, 'name':paramName});
 		        	user.save(function(err) {
 		        		if (err) {
@@ -41,7 +41,7 @@ module.exports = new LocalStrategy({
 		        		}
 		        		
 		        	    console.log("[local_signup.js] added user data.");
-		        	    return done(null, user);  // 검증 콜백에서 두 번째 파라미터의 값을 user 객체로 넣어 인증 성공한 것으로 처리
+		        	    return done(null, user);  // user in second parameter means authentication succeed.
 		        	});
 		        }
 		    });    
