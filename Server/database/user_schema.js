@@ -1,6 +1,6 @@
 /**
  * module for definition of database schema
- *
+ * 
  * @date 2016-11-10
  * @author Mike
  */
@@ -25,7 +25,11 @@ Schema.createSchema = function(mongoose) {
 	    , twitter: {}
 	    , github: {}
 	    , google: {}
-	    , linkedin: {}
+		, linkedin: {}
+		//Updated for the specification in Database file(google drive)
+		, display_name: {type: String, 'default':''}
+		, country: {type: String, 'default':''}
+		, exp: {type: Number, 'default':0}
 	});
 	
 	// password is setted as virtual method : This is convenient attribute which is not using MongoDB at all. Selecting specific element and defining set, get method
