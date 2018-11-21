@@ -5,19 +5,15 @@
 		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 		
 		<title>Profile page</title>
-		
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    	
+		<% include ./bootstrap.ejs %>
     	<style>
         	body        { padding-top:80px; }
     	</style>
     
 	</head>
 	<body>
-		
 		<div class="container">			
-						
+			<% include ./header.ejs %>				
 			<div class="page-header text-center">
 		        <h1><span class="fa fa-book"></span> User profile</h1>
 		        <a href="/logout" class="btn btn-default btn-sm">logout</a>

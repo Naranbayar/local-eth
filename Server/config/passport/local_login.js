@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports = new LocalStrategy({
 		usernameField : 'email',
 		passwordField : 'password',
+		session : true,
 		passReqToCallback : true   //Using this option means first parameter of below callback function is req object.
 	}, function(req, email, password, done) { 
 		console.log('[local_login.js] local-login is called in passport : ' + email + ', ' + password);

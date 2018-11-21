@@ -1,52 +1,61 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-		
-		<title>Home</title>
-		
-		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-    	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-    	
-    	<style>
-        	body { padding-top:80px; }
-        	
-			@font-face {
-				font-family: 'Nanum Gothic'; font-style: normal; font-weight: 400;
-				src: url('../public/NanumGothic-Regular.eot');
-				src: local('NanumGothic'),
-					url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
-					url('../public/NanumGothic-Regular.woff2') format('woff2'),
-					url('../public/NanumGothic-Regular.woff') format('woff'),
-					url('../public/NanumGothic-Regular.ttf') format('truetype');
-			}
-        	
-        	h1, p, a { font-family: 'Nanum Gothic' }
-    	</style>
-    
-	</head>
-	<body>
-		<div class="container">
-		    <div class="jumbotron text-center">
-		        <h1><span class="fa fa-shopping-cart"></span> Home page</h1>
-				<br>
-				<% if (login_success) { %>
-					<p>you're already logged in</p>
-					<br>
-					<a href="/logout" class="btn btn-default"><span class="fa fa-user"></span>logout</a>
-				<% } else { %>
-					<p>Please sign in.<p>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+	<title>Home</title>
+	<% include ./bootstrap.ejs %>
+	<style>
+		body {
+			padding-top: 80px;
+		}
+
+		@font-face {
+			font-family: 'Nanum Gothic';
+			font-style: normal;
+			font-weight: 400;
+			src: url('../public/NanumGothic-Regular.eot');
+			src: local('NanumGothic'),
+				url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+				url('../public/NanumGothic-Regular.woff2') format('woff2'),
+				url('../public/NanumGothic-Regular.woff') format('woff'),
+				url('../public/NanumGothic-Regular.ttf') format('truetype');
+		}
+
+		h1,
+		p,
+		a {
+			font-family: 'Nanum Gothic'
+		}
+	</style>
+
+</head>
+
+<body>
+	<% include ./header.ejs %>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<h1><span class="fa fa-shopping-cart"></span> Home page</h1>
+			<br>
+			<% if (login_success) { %>
+			<p>you're already logged in</p>
+			<br>
+			<a href="/logout" class="btn btn-default"><span class="fa fa-user"></span>logout</a>
+			<% } else { %>
+			<p>Please sign in.<p>
 					<p>If you don't have an account, Please Sign up.</p>
 					<br>
-			        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Sign in</a>
-			        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Sign up</a>
+					<a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Sign in</a>
+					<a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Sign up</a>
 					<br>
 					<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Sign in by facebook</a>
-				<% } %>
-				
-		    </div>
-		
+					<% } %>
+
 		</div>
-	</body>
+
+	</div>
+</body>
+
 </html>

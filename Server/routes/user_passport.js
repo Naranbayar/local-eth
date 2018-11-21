@@ -18,17 +18,17 @@ module.exports = function(router, passport) {
         // Not authenticated cases
         if (!req.user) {
             console.log('[user_passports.js] User auth is needed.');
-            res.render('main_page.ejs', {login_success:false});
+            res.render('main_page.ejs', {user:null});
         } else {
             console.log('[user_passports.js] We have user auth.');
-            res.render('main_page.ejs', {login_success:true});
+            res.render('main_page.ejs', {user:req.user});
         }
     });
     
     // Sign in page
     router.route('/login').get(function(req, res) {
         console.log('[user_passports.js] /login path is requested.');
-        res.render('login.ejs', {message: req.flash('loginMessage')});
+        res.render('login.ejs', {message: req.flash('loginMessage'), user:req.user});
     });
 	 
     // Sign up page
@@ -55,9 +55,9 @@ module.exports = function(router, passport) {
             console.dir(req.user);
 
             if (Array.isArray(req.user)) {
-                res.render('profile.ejs', {user: req.user[0]._doc});
+                res.render('profile.ejs', {user: req.user[0]._doc, login_success:true});
             } else {
-                res.render('profile.ejs', {user: req.user});
+                res.render('profile.ejs', {user: req.user, login_success:true});
             }
         }
     });
