@@ -34,7 +34,7 @@ module.exports = function(router, passport) {
     // Sign up page
     router.route('/signup').get(function(req, res) {
         console.log('[user_passports.js] /signup path is requested.');
-        res.render('signup.ejs', {message: req.flash('signupMessage')});
+        res.render('signup.ejs', {message: req.flash('signupMessage'), user:req.user});
     });
 	 
     // profile page
