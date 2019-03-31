@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <title>Home</title>
+    <% include ./bootstrap.ejs %>
+    <style>
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../public/NanumGothic-Regular.eot');
+            src: local('NanumGothic'),
+                url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+                url('../public/NanumGothic-Regular.woff2') format('woff2'),
+                url('../public/NanumGothic-Regular.woff') format('woff'),
+                url('../public/NanumGothic-Regular.ttf') format('truetype');
+        }
+
+        h1,
+        p,
+        a {
+            font-family: 'Nanum Gothic'
+        }
+
+        #purple {
+            color: darkslateblue;
+        }
+    </style>
+
+</head>
+
+<body>
+    <% include ./header.ejs %>
+    <div class="container" style="margin: auto;">
+        <div class="row">
+            <div class="col">
+                <br>
+                <h5 id="purple">
+                    My Offers
+                </h5>
+                <h5 class="text-secondary">
+                    > Create a new offer
+                </h5>
+                <br>
+            </div>
+        </div>
+        <div class="row border-top">
+            <div class="col">
+                <form action="/addOffers" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <div><b>Do you want to buy or sell ether?</b></div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="orderType" id="inlineCheckbox1"
+                                    value="BUY" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Buy ether for money</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="orderType" id="inlineCheckbox2"
+                                    value="SELL">
+                                <label class="form-check-label" for="inlineCheckbox2">Sell ether for money</label>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <div><b>What location do you want to display?</b></div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="country" id="inlineCheckbox1"
+                                    value="KOR" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Hwaseong-si, Gyeonggi-do,
+                                    KR</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="country" id="inlineCheckbox2"
+                                    value="KOR">
+                                <label class="form-check-label" for="inlineCheckbox2">Suwon, Gyeonggi-do, KR</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="country" id="inlineCheckbox2"
+                                    value="KOR">
+                                <label class="form-check-label" for="inlineCheckbox2">Ansan-si, Gyeonggi-do, KR</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="country" id="inlineCheckbox2"
+                                    value="USA">
+                                <label class="form-check-label" for="inlineCheckbox2">Other</label>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <div><b>Which payment method do you want to accept?</b></div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="paymentType" id="inlineCheckbox1"
+                                    value="CASH" checked>
+                                <label class="form-check-label" for="inlineCheckbox1">Cash</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="paymentType" id="inlineCheckbox2"
+                                    value="BANK">
+                                <label class="form-check-label" for="inlineCheckbox2">Bank Transfer</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="paymentType" id="inlineCheckbox2"
+                                    value="CASH">
+                                <label class="form-check-label" for="inlineCheckbox2">Cash Deposit</label>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <div><b>How much amount do you want to trade?</b></div>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <label class="sr-only" for="inlineFormInput">Max</label>
+                                <input class="form-check-input" name="amountMin" type="text" placeholder="E.g., 1">
+                                <label class="sr-only" for="inlineFormInput">Min</label>
+                                <input class="form-check-input" name="amountMax" type="text" placeholder="E.g., 0.001">
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <br>
+                            <button type="submit" class="btn btn-info btn-block">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
