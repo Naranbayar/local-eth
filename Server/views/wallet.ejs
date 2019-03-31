@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <title>Home</title>
+    <% include ./bootstrap.ejs %>
+    <style>
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../public/NanumGothic-Regular.eot');
+            src: local('NanumGothic'),
+                url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+                url('../public/NanumGothic-Regular.woff2') format('woff2'),
+                url('../public/NanumGothic-Regular.woff') format('woff'),
+                url('../public/NanumGothic-Regular.ttf') format('truetype');
+        }
+
+        h1,
+        p,
+        a {
+            font-family: 'Nanum Gothic'
+        }
+
+        #yellow-card {
+            background-color: khaki
+        }
+    </style>
+
+</head>
+
+<body>
+    <% include ./header.ejs %>
+    <div class="container" style="margin: auto;">
+        <h4>My wallet</h4><br>
+        <div class="row">
+            <div class="card" id="yellow-card">
+                <div class="card-body">Please confirm your e-mail address before making a deposit. You won't be
+                    able to log in to access your wallet without control of your e-mail address.</div>
+            </div>
+        </div>
+        <br>
+        <div class="row justify-content-center">
+            <div class="col-sm border-right">
+                <div class="row">
+                    <div class="col-8"><b>Total balance</b></div>
+                    <div class="col-4 text-right">
+                        <b>0 ETH</b><br>
+                        (~₩0.00)
+                        <br>
+                    </div>
+                </div>
+                <div class="row border-top">
+                    <div class="col">
+                        <form>
+                            <br>
+                            <h4><b>Send ether</b></h4>
+                            <br>
+                            <div class="form-group">
+                                <label for="toAddress">To address</label>
+                                <input type="text" class="form-control" id="toAddress" placeholder="e.g. 0x0000…">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Amount (ETH)</label>
+                                <input type="password" class="form-control" id="amount" placeholder="e.g. 0.001">
+                            </div>
+                            <div class="form-group">
+                                <label for="fromAddress">From address</label>
+                                <input type="password" class="form-control" id="fromAddress" placeholder="e.g. 0x0000…">
+                            </div>
+                            No address with balance found<br>
+                            <button type="submit" class="btn btn-info btn-block">Transfer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card">
+                    <div class="card-body">
+                        0x8215059f85482e3298Be54159D2Ee58cc7ddaB0A
+                        <br>
+                        Unused (recommended for deposits)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

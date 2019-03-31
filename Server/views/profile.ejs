@@ -1,69 +1,69 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-		
-		<title>Profile page</title>
-		<% include ./bootstrap.ejs %>
-    	<style>
-        	body        { padding-top:80px; }
-    	</style>
-    
-	</head>
-	<body>
-		<div class="container">			
-			<% include ./header.ejs %>				
-			<div class="page-header text-center">
-		        <h1><span class="fa fa-book"></span> User profile</h1>
-		        <a href="/logout" class="btn btn-default btn-sm">logout</a>
-		    </div>
-			<br>
-		    <div class="row">
-		
-		        <div class="col-sm-6">
-		            <div class="well">
-		            
-		            	<% if (user.provider == undefined || user.provider == '') { %>
-			                <h3><span class="fa fa-user"></span> local profile</h3>
-							<br>
-							<p>
-								<strong>Email</strong>: <%= user.email %><br><br>
-		                		<strong>Nickname</strong>: <%= user.name %>
-			                </p>
-			            <% } else if (user.provider == 'facebook') { %>
-							<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook profile</h3>
-							<br>
-		                    <p>
-		                        <strong>ID</strong>: <%= user.facebook.id %><br><br>
-		                        <strong>Email</strong>: <%= user.facebook.email %><br><br>
-		                        <strong>name</strong>: <%= user.facebook.name %>
-		                    </p>
-		                <% } else if (user.provider == 'twitter') { %>
-							<h3 class="text-primary"><span class="fa fa-twitter"></span> Twitter profile</h3>
-							<br>
-		                    <p>
-		                        <strong>ID</strong>: <%= user.twitter.id %><br><br>
-		                        <strong>Email</strong>: <%= user.twitter.email %><br><br>
-		                        <strong>name</strong>: <%= user.twitter.name %>
-		                    </p>
-		                <% } else if (user.provider == 'google') { %>
-							<h3 class="text-primary"><span class="fa fa-google"></span> Google profile</h3>
-							<br>
-		                    <p>
-		                        <strong>ID</strong>: <%= user.google.id %><br><br>
-		                        <strong>Email</strong>: <%= user.google.email %><br><br>
-		                        <strong>name</strong>: <%= user.google.name %>
-		                    </p>
-						<% } %>
-		                	
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+	<title>Profile page</title>
+	<% include ./bootstrap.ejs %>
+
+</head>
+
+<body>
+	<% include ./header.ejs %>
+	<div class="container">
+		<div class="page-header">
+			<h4><span class="fa fa-book"></span> User profile</h4>
+		</div>
+		<br>
+		<div class="row">
+
+			<div class="col-sm-6">
+				<div class="well">
+
+					<% if (user.provider == undefined || user.provider == '') { %>
+					<b><span class="fa fa-user"></span> local profile</b>
+					<br>
+					<p>
 						<br>
-		            </div>
-		        </div>
-		
-		    </div>
-			
-		</div>	
-			
-	</body>
+						<strong>Email</strong>: <%= user.email %><br><br>
+						<strong>Nickname</strong>: <%= user.name %>
+					</p>
+					<% } else if (user.provider == 'facebook') { %>
+					<h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook profile</h3>
+					<br>
+					<p>
+						<strong>ID</strong>: <%= user.facebook.id %><br><br>
+						<strong>Email</strong>: <%= user.facebook.email %><br><br>
+						<strong>name</strong>: <%= user.facebook.name %>
+					</p>
+					<% } else if (user.provider == 'twitter') { %>
+					<h3 class="text-primary"><span class="fa fa-twitter"></span> Twitter profile</h3>
+					<br>
+					<p>
+						<strong>ID</strong>: <%= user.twitter.id %><br><br>
+						<strong>Email</strong>: <%= user.twitter.email %><br><br>
+						<strong>name</strong>: <%= user.twitter.name %>
+					</p>
+					<% } else if (user.provider == 'google') { %>
+					<h3 class="text-primary"><span class="fa fa-google"></span> Google profile</h3>
+					<br>
+					<p>
+						<strong>ID</strong>: <%= user.google.id %><br><br>
+						<strong>Email</strong>: <%= user.google.email %><br><br>
+						<strong>name</strong>: <%= user.google.name %>
+					</p>
+					<% } %>
+
+					<br>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+
 </html>

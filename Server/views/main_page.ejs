@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-		
-		<title>Home</title>
-		<% include ./bootstrap.ejs %>
-    	<style>
-        	body { padding-top:80px; }
-        	
-			@font-face {
-				font-family: 'Nanum Gothic'; font-style: normal; font-weight: 400;
-				src: url('../public/NanumGothic-Regular.eot');
-				src: local('NanumGothic'),
-					url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
-					url('../public/NanumGothic-Regular.woff2') format('woff2'),
-					url('../public/NanumGothic-Regular.woff') format('woff'),
-					url('../public/NanumGothic-Regular.ttf') format('truetype');
-			}
-        	
-        	h1, p, a { font-family: 'Nanum Gothic' }
-    	</style>
-    
-	</head>
-	<body>
-		<% include ./header.ejs %>
-		<div class="container">
-		    <div class="jumbotron text-center">
-		        <h1><span class="fa fa-shopping-cart"></span> Home page</h1>
-				<br>
-				<% if (user) { %>
-					<p>you're already logged in</p>
-					<br>
-					<a href="/logout" class="btn btn-default"><span class="fa fa-user"></span>logout</a>
-				<% } else { %>
-					<p>Please sign in.<p>
-					<p>If you don't have an account, Please Sign up.</p>
-					<br>
-			        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Sign in</a>
-			        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Sign up</a>
-					<br>
-					<a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Sign in by facebook</a>
-				<% } %>
-				
-		    </div>
-		
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+	<title>Home</title>
+	<% include ./bootstrap.ejs %>
+	<style>
+		@font-face {
+			font-family: 'Nanum Gothic';
+			font-style: normal;
+			font-weight: 400;
+			src: url('../public/NanumGothic-Regular.eot');
+			src: local('NanumGothic'),
+				url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+				url('../public/NanumGothic-Regular.woff2') format('woff2'),
+				url('../public/NanumGothic-Regular.woff') format('woff'),
+				url('../public/NanumGothic-Regular.ttf') format('truetype');
+		}
+
+		h1,
+		p,
+		a {
+			font-family: 'Nanum Gothic'
+		}
+	</style>
+
+</head>
+
+<body>
+	<% include ./header.ejs %>
+	<div class="container">
+		<div class="jumbotron text-center">
+			<b>
+				<h1>LocalEthereum is how people</h1>
+			</b>
+			<b>
+				<h1>exchange ETH peer-to-peer</h1>
+			</b>
+			<h2><span class="fa fa-male"></span> <span class="fa fa-exchange"></span> <span class="fa fa-male"></span></h2>
 		</div>
-	</body>
+
+		<div class="row">
+			<div class="col-1"></div>
+			<div class="col-3">
+				<h2><b>Quick.</b></h2><br>
+				Money in your account within minutes.* Use any payment method in 130+ countries.
+			</div>
+			<div class="col-4">
+				<h2><b>Friendly.</b></h2><br>
+				A trading interface built for all audiences. No KYC required—begin trading in 30 seconds!
+			</div>
+			<div class="col-3">
+				<h2><b>Safe.</b></h2><br>
+				The only marketplace that’s self-custodial and end-to-end encrypted.
+			</div>
+			<div class="col-1"></div>
+		</div>
+		<div class="row"><br></div>
+		<div class="row justify-content-center text-center">
+			<button type="button" class="btn btn-outline-info">VIEW BUY & SELL OFFERS</button>
+		</div>
+		<br>
+		<p class="text-secondary text-center">Choose from more than 30 payment methods.</p>
+	</div>
+</body>
+
 </html>

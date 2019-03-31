@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <title>Home</title>
+    <% include ./bootstrap.ejs %>
+    <style>
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../public/NanumGothic-Regular.eot');
+            src: local('NanumGothic'),
+                url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+                url('../public/NanumGothic-Regular.woff2') format('woff2'),
+                url('../public/NanumGothic-Regular.woff') format('woff'),
+                url('../public/NanumGothic-Regular.ttf') format('truetype');
+        }
+
+        h1,
+        p,
+        a {
+            font-family: 'Nanum Gothic'
+        }
+    </style>
+
+</head>
+
+<body>
+    <% include ./header.ejs %>
+    <div class="container" style="margin: auto;">
+        <div class="row">
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="sel1">I want to...</label>
+                    <select class="form-control" id="sel1">
+                        <option>Buy or sell ETH</option>
+                        <option>Buy ETH</option>
+                        <option>Sell ETH</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="sel2">Payment method</label>
+                    <select class="form-control" id="sel2">
+                        <option>Any payment method</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="sel3">Location</label>
+                    <select class="form-control" id="sel3">
+                        <option>Worldwide</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="sel4">Sort by</label>
+                    <select class="form-control" id="sel4">
+                        <option>Popularity</option>
+                        <option>Price</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row border-top">
+            <div class="col">
+                <br>
+                <h4>Buy ETH from these sellers:</h4>
+                <br>
+                <a class="btn btn-info" href="#">BROWSE ALL SELLERS</a>
+                <br>
+            </div>
+        </div>
+        <div class="row border-top" style="margin-top:20px;">
+            <div class="col">
+                <br>
+                <h4>Sell ETH to these buyers:</h4>
+                <br>
+                <a class="btn btn-info" href="#">BROWSE ALL BUYERS</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

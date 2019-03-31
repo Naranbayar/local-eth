@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <title>Home</title>
+    <% include ./bootstrap.ejs %>
+    <style>
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../public/NanumGothic-Regular.eot');
+            src: local('NanumGothic'),
+                url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+                url('../public/NanumGothic-Regular.woff2') format('woff2'),
+                url('../public/NanumGothic-Regular.woff') format('woff'),
+                url('../public/NanumGothic-Regular.ttf') format('truetype');
+        }
+
+        h1,
+        p,
+        a {
+            font-family: 'Nanum Gothic'
+        }
+    </style>
+
+</head>
+
+<body>
+    <% include ./header.ejs %>
+    <div class="container" style="margin: auto;">
+        <div class="row">
+            <div class="col-5">
+                <h4>My offers</h4>
+                <br>
+                <p class="text-secondary">
+                    Creating an offer will allow you to set your own rate and terms, and enjoy a 0.25% fee. People that
+                    respond
+                    to offers pay a 0.75% fee.
+                    <b>You don’t have any offers yet.</b>
+                </p>
+                <form><br>
+                    <button type="submit" class="btn btn-info btn-block">CREATE AN OFFER</button>
+                </form>
+            </div>
+            <div class="col-5"></div>
+        </div>
+    </div>
+</body>
+
+</html>

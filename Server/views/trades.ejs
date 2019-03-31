@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <title>Home</title>
+    <% include ./bootstrap.ejs %>
+    <style>
+        @font-face {
+            font-family: 'Nanum Gothic';
+            font-style: normal;
+            font-weight: 400;
+            src: url('../public/NanumGothic-Regular.eot');
+            src: local('NanumGothic'),
+                url('../public/NanumGothic-Regular.eot?#iefix') format('embedded-opentype'),
+                url('../public/NanumGothic-Regular.woff2') format('woff2'),
+                url('../public/NanumGothic-Regular.woff') format('woff'),
+                url('../public/NanumGothic-Regular.ttf') format('truetype');
+        }
+
+        h1,
+        p,
+        a {
+            font-family: 'Nanum Gothic'
+        }
+    </style>
+
+</head>
+
+<body>
+    <% include ./header.ejs %>
+    <div class="container" style="margin: auto;">
+        <div class="row">
+            <div class="col">
+                <b>
+                    <h4>Active trades</h4>
+                </b>
+                <p class="text-left">
+                    You don't have any open trades at the moment.
+                </p>
+                <form>
+                    <a class="btn btn-info" href="#">FIND AN OFFER</a> OR <a class="btn btn-info" href="#">CREATE A NEW OFFER</a>
+                </form>
+                <br>
+            </div>
+        </div>
+        <div class="row border-top">
+            <div class="col">
+                    <br>
+                <b>
+                    <h4>Past trades</h4>
+                </b>
+                <p class="text-left">
+                    You have not completed any trades yet.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

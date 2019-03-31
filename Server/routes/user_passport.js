@@ -61,7 +61,7 @@ module.exports = function(router, passport) {
             }
         }
     });
-	
+    
     // sign out
     router.route('/logout').get(function(req, res) {
         console.log('[user_passports.js] /logout path is requested.');
