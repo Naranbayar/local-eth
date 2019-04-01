@@ -106,6 +106,10 @@ Schema.createSchema = function(mongoose) {
 	UserSchema.static('findByEmail', function(email, callback) {
 		return this.find({email:email}, callback);
 	});
+
+	UserSchema.static('findByName', function(name, callback) {
+		return this.find({name:name}, callback);
+	});
 	
 	UserSchema.static('findAll', function(callback) {
 		return this.find({}, callback);
