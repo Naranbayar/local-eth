@@ -98,6 +98,9 @@ SchemaOffer.createSchema = function (mongoose) {
         }).exec(callback);
     });
 
+    OfferSchema.static('updateBrowse', function (id, callback) {
+        return this.update({ _id: id }, { $set: { status: 'DONE' } }).exec(callback);
+    });
     console.log('[offer_schema.js] OfferSchema success.');
 
     return OfferSchema;

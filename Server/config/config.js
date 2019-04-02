@@ -30,6 +30,7 @@ module.exports = {
 		{file:'./wallet', path:'/wallet', method:'listWallet', type:'get'},
 		{file:'./browse', path:'/browse', method:'addBrowse', type:'post'},
 		{file:'./browse', path:'/browse', method:'listBrowse', type:'get'},
+		{file:'./browse', path:'/browse/:id', method:'updateBrowse', type:'get'},
 		{file:'./trades', path:'/trades', method:'addTrades', type:'post'},
 		{file:'./trades', path:'/trades', method:'listTrades', type:'get'},
 		{file:'./offers', path:'/addOffers', method:'addOffers', type:'post'},
