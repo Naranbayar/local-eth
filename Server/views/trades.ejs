@@ -31,30 +31,137 @@
 
 <body>
     <% include ./header.ejs %>
+    <%
+        var cnt_me=0,cnt_you=0;
+        if (db != null){
+            for(var i = 0; i < db.length; i++) { 
+                if(db[i].user == user.name) {
+                    cnt_me++;
+                } else {
+                    cnt_you++;
+                } 
+            }
+        }
+    %>
     <div class="container" style="margin: auto;">
         <div class="row">
             <div class="col">
                 <b>
                     <h4>Active trades</h4>
                 </b>
+                <% if(cnt_me == 0) { %>
                 <p class="text-left">
                     You don't have any open trades at the moment.
                 </p>
+                <% } else { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>User</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Country</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Currency</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Amount</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if (db !== null){
+                        for(var i = 0; i < db.length; i++) { 
+                            if(db[i].user == user.name) { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4><%=db[i].user%></h4>
+                            </div>
+                            <div class="col">
+                                <%=db[i].country%>
+                            </div>
+                            <div class="col">
+                                <%=db[i].currency%>
+                            </div>
+                            <div class="col">
+                                <%=db[i].amount_min%> to <%=db[i].amount_max%>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-info" href="#">BUY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  }}}} %>
                 <form>
-                    <a class="btn btn-info" href="/browse">FIND AN OFFER</a> OR <a class="btn btn-info" href="/add_offers">CREATE A NEW OFFER</a>
+                    <a class="btn btn-info" href="/browse">FIND AN OFFER</a> OR <a class="btn btn-info"
+                        href="/add_offers">CREATE A NEW OFFER</a>
                 </form>
                 <br>
             </div>
         </div>
         <div class="row border-top">
             <div class="col">
-                    <br>
+                <br>
                 <b>
                     <h4>Past trades</h4>
                 </b>
-                <p class="text-left">
-                    You have not completed any trades yet.
-                </p>
+                <% if(cnt_me == 0) { %>
+                    <p class="text-left">
+                        You have not completed any trades yet.
+                    </p>
+                <% } else { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>User</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Country</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Currency</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Amount</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if (db !== null){
+                        for(var i = 0; i < db.length; i++) { 
+                            if(db[i].user != user.name) { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4><%=db[i].user%></h4>
+                            </div>
+                            <div class="col">
+                                <%=db[i].country%>
+                            </div>
+                            <div class="col">
+                                <%=db[i].currency%>
+                            </div>
+                            <div class="col">
+                                <%=db[i].amount_min%> to <%=db[i].amount_max%>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-info" href="#">BUY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  }}}} %>
             </div>
         </div>
     </div>

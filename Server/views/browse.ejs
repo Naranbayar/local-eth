@@ -79,6 +79,51 @@
                 <br>
                 <h4>Buy ETH from these sellers:</h4>
                 <br>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>User</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Country</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Currency</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Amount</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if (buys !== null){
+                    for(var i = 0; i < buys.length; i++) { 
+                        if(buys[i].type == "BUY") { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4><%=buys[i].user%></h4>
+                            </div>
+                            <div class="col">
+                                <%=buys[i].country%>
+                            </div>
+                            <div class="col">
+                                <%=buys[i].currency%>
+                            </div>
+                            <div class="col">
+                                <%=buys[i].amount_min%> to <%=buys[i].amount_max%>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-info" href="#">BUY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  }}} %>
                 <a class="btn btn-info" href="#">BROWSE ALL SELLERS</a>
                 <br>
             </div>
@@ -88,6 +133,51 @@
                 <br>
                 <h4>Sell ETH to these buyers:</h4>
                 <br>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4>User</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Country</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Currency</h4>
+                            </div>
+                            <div class="col">
+                                <h4>Amount</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% if (sells !== null){
+                    for(var i = 0; i < sells.length; i++) { 
+                        if(sells[i].type == "SELL") { %>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4><%=sells[i].user%></h4>
+                            </div>
+                            <div class="col">
+                                <%=sells[i].country%>
+                            </div>
+                            <div class="col">
+                                <%=sells[i].currency%>
+                            </div>
+                            <div class="col">
+                                <%=sells[i].amount_min%> to <%=sells[i].amount_max%>
+                            </div>
+                            <div class="col">
+                                <a class="btn btn-info" href="#">SELL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%  }}} %>
                 <a class="btn btn-info" href="#">BROWSE ALL BUYERS</a>
             </div>
         </div>
