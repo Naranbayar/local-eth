@@ -70,6 +70,7 @@
                                 <h4>Amount</h4>
                             </div>
                             <div class="col">
+                                <h4>Status</h4>
                             </div>
                         </div>
                     </div>
@@ -93,7 +94,7 @@
                                 <%=db[i].amount_min%> to <%=db[i].amount_max%>
                             </div>
                             <div class="col">
-                                <a class="btn btn-info" href="#">BUY</a>
+                                <a class="btn btn-success" href="#">Active</a>
                             </div>
                         </div>
                     </div>
@@ -133,13 +134,14 @@
                                 <h4>Amount</h4>
                             </div>
                             <div class="col">
+                                <h4>Status</h4>
                             </div>
                         </div>
                     </div>
                 </div>
                 <% if (db !== null){
                         for(var i = 0; i < db.length; i++) { 
-                            if(db[i].user != user.name) { %>
+                            if(db[i].user == user.name) { %>
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -156,7 +158,7 @@
                                 <%=db[i].amount_min%> to <%=db[i].amount_max%>
                             </div>
                             <div class="col">
-                                <a class="btn btn-info" href="#">BUY</a>
+                                <a class="btn btn-danger" href="#">Done</a>
                             </div>
                         </div>
                     </div>
